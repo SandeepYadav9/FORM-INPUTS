@@ -1,32 +1,29 @@
-import React  from "react";
+import React, { useState } from "react";
 import "./BasicInput.css";
-import useInput from "./hooks/use-Input";
 function BasicInput() {
+  const [name, setName] = useState("");
+  const [isTouch, setIsTouch] = useState(false);
 
-const {
-  value: name,
-  onErrorHandler:nameBlurHandler,
-  onValueInputHandler:nameChangeHandler,
-  nameIsInValid:nameInvalid,
-  nameIsValid: validName,
-  reset:resetHandler
-}=useInput(value => value.trim() !== '')
-
- 
-  
- 
+  const nameIsValid = name.trim() !== "";
+  const nameIsInValid = !nameIsValid && isTouch;
+  const onChangeHandler = (e) => {
+    setName(e.target.value);
+  };
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log(name);
-    
-    if (!validName) {
+    setIsTouch(true);
+    if (!nameIsValid) {
       return;
     }
-  resetHandler ()
+    setName("");
+    setIsTouch(false);
   };
-  
+  const onBlurHandler = () => {
+    setIsTouch(true);
+  };
 
-  const formControlClass = nameInvalid
+  const formControlClass = nameIsInValid
     ? "form-control invalid"
     : "form-control";
   return (
@@ -38,10 +35,10 @@ const {
             type="text"
             id="name"
             value={name}
-            onChange={nameChangeHandler}
-            onBlur={nameBlurHandler}
+            onChange={onChangeHandler}
+            onBlur={onBlurHandler}
           />
-          {nameInvalid && (
+          {nameIsInValid && (
             <p className="error-text">Empty name is Not Allowed !</p>
           )}
           <div className="form-actions">
