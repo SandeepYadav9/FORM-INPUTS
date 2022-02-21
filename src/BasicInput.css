@@ -5,11 +5,9 @@
   max-width: 43rem;
   padding: 16px;
   border-radius: 5px;
-  
 }
 .form-control {
   margin: 3rem auto;
-  
 }
 .form-control label,
 .form-control input {
@@ -55,6 +53,6 @@ button:active {
   border-color: yellow;
   background-color: #fff;
 }
-.error-text{
+.error-text {
   color: rgb(240, 44, 44);
 }

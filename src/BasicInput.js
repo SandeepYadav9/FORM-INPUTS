@@ -1,30 +1,25 @@
-import React  from "react";
+import React from "react";
 import "./BasicInput.css";
 import useInput from "./hooks/use-Input";
 function BasicInput() {
+  const {
+    value: name,
+    onErrorHandler: nameBlurHandler,
+    onValueInputHandler: nameChangeHandler,
+    nameIsInValid: nameInvalid,
+    nameIsValid: validName,
+    reset: resetHandler,
+  } = useInput((value) => value.trim() !== "");
 
-const {
-  value: name,
-  onErrorHandler:nameBlurHandler,
-  onValueInputHandler:nameChangeHandler,
-  nameIsInValid:nameInvalid,
-  nameIsValid: validName,
-  reset:resetHandler
-}=useInput(value => value.trim() !== '')
-
- 
-  
- 
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log(name);
-    
+
     if (!validName) {
       return;
     }
-  resetHandler ()
+    resetHandler();
   };
-  
 
   const formControlClass = nameInvalid
     ? "form-control invalid"
